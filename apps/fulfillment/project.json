@@ -1,22 +1,29 @@
 {
-  "name": "temporal-kf",
+  "name": "fulfillment",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/temporal-kf/src",
+  "sourceRoot": "apps/fulfillment/src",
   "projectType": "application",
   "tags": [],
   "targets": {
+    "create-order": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "options": {
+        "command": "ts-node -P tsconfig.app.json ./src/create-order.ts",
+        "cwd": "apps/fulfillment"
+      }
+    },
     "build": {
       "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "platform": "node",
-        "outputPath": "dist/apps/temporal-kf",
+        "outputPath": "dist/apps/fulfillment",
         "format": ["cjs"],
         "bundle": false,
-        "main": "apps/temporal-kf/src/main.ts",
-        "tsConfig": "apps/temporal-kf/tsconfig.app.json",
-        "assets": ["apps/temporal-kf/src/assets"],
+        "main": "apps/fulfillment/src/main.ts",
+        "tsConfig": "apps/fulfillment/tsconfig.app.json",
         "generatePackageJson": true,
         "esbuildOptions": {
           "sourcemap": true,
@@ -43,15 +50,15 @@
       "defaultConfiguration": "development",
       "dependsOn": ["build"],
       "options": {
-        "buildTarget": "temporal-kf:build",
+        "buildTarget": "fulfillment:build",
         "runBuildTargetDependencies": false
       },
       "configurations": {
         "development": {
-          "buildTarget": "temporal-kf:build:development"
+          "buildTarget": "fulfillment:build:development"
         },
         "production": {
-          "buildTarget": "temporal-kf:build:production"
+          "buildTarget": "fulfillment:build:production"
         }
       }
     },
@@ -62,7 +69,7 @@
     },
     "docker-build": {
       "dependsOn": ["build"],
-      "command": "docker build -f apps/temporal-kf/Dockerfile . -t temporal-kf"
+      "command": "docker build -f apps/fulfillment/Dockerfile . -t fulfillment"
     }
   }
 }

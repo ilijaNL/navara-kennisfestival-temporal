@@ -1,10 +1,10 @@
 export default {
-  displayName: 'temporal-kf',
+  displayName: 'fulfillment',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/apps/temporal-kf',
+  coverageDirectory: '../../coverage/apps/fulfillment',
 };

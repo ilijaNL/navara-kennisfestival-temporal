@@ -1,0 +1,59 @@
+{
+  "name": "flaky-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/flaky-api/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/flaky-api",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/flaky-api/src/main.ts",
+        "tsConfig": "apps/flaky-api/tsconfig.app.json",
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "inspect": false,
+        "watch": false,
+        "buildTarget": "flaky-api:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "flaky-api:build:development"
+        },
+        "production": {
+          "buildTarget": "flaky-api:build:production"
+        }
+      }
+    }
+  }
+}
