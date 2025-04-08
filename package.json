@@ -4,12 +4,14 @@
   "license": "MIT",
   "scripts": {},
   "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
     "@temporalio/activity": "^1.11.7",
     "@temporalio/common": "^1.11.7",
     "@temporalio/worker": "^1.11.7",
     "@temporalio/workflow": "^1.11.7",
-    "axios": "^1.6.0",
     "fastify": "~5.2.1"
   },
   "devDependencies": {
@@ -25,7 +27,7 @@
     "@swc/core": "~1.5.7",
     "@swc/helpers": "~0.5.11",
     "@types/jest": "^29.5.12",
-    "@types/node": "~18.16.9",
+    "@types/node": "~22.14.0",
     "esbuild": "^0.19.2",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^9.0.0",

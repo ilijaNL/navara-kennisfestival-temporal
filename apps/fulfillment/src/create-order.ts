@@ -5,14 +5,14 @@ import { TASK_QUEUE } from './constants';
 
 async function createOrder() {
   const temporalClient = new Client();
-  const orderId = randomUUID();
+  const orderId = `order::${randomUUID()}`;
   await temporalClient.workflow.start(orderFulfillment, {
     args: [orderId],
     workflowId: orderId,
     taskQueue: TASK_QUEUE,
   });
 
-  console.log(`Order with "${orderId}" created`);
+  console.log(`---- Order with "${orderId}" created ----`);
 }
 
 createOrder().catch((err) => {

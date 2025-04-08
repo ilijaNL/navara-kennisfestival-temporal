@@ -102,6 +102,8 @@ const getFilePath = (orderId: OrderId) =>
   path.join(tmpdir(), `order-${orderId}`);
 
 async function retrieveOrder(orderId: OrderId) {
+  await delay(2000);
+
   const filePath = getFilePath(orderId);
   const fileExists = await stat(filePath)
     .then((s) => s.isFile())
@@ -120,10 +122,13 @@ async function storeOrder(order: Order) {
   await writeFile(filePath, JSON.stringify(order), { encoding: 'utf8' });
 }
 
+
+
 async function app(instance: FastifyInstance) {
+
   instance.post('/validate', async (request) => {
-    await delay(2000);
     const { orderId } = request.body as any;
+
     const order = await retrieveOrder(orderId);
 
     order.validate();
@@ -135,9 +140,16 @@ async function app(instance: FastifyInstance) {
     };
   });
 
+  const seenOrders = new Set<string>();
+
   instance.post('/pay', async (request) => {
-    await delay(1000);
     const { orderId } = request.body as any;
+
+    // throw on first time
+    if (!seenOrders.has(orderId)) {
+      seenOrders.add(orderId);
+      throw new Error('Kaboom');
+    }
 
     const order = await retrieveOrder(orderId);
     order.pay();
@@ -149,7 +161,6 @@ async function app(instance: FastifyInstance) {
   });
 
   instance.post('/send', async (request) => {
-    await delay(1000);
 
     const { orderId } = request.body as any;
 
@@ -172,6 +183,6 @@ server.listen({ port, host }, (err) => {
     server.log.error(err);
     process.exit(1);
   } else {
-    console.log(`[ ready ] http://${host}:${port}`);
+    console.log(`[ Flaky API ] Started on http://${host}:${port}`);
   }
 });

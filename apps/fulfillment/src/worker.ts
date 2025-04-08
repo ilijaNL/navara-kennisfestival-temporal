@@ -20,9 +20,10 @@ export async function startWorker() {
       taskQueue: TASK_QUEUE,
     });
 
-    console.log('Worker started');
+    console.log('[ Fulfillment Service ] Worker started');
 
     await worker.run();
+
   } finally {
     // Close the connection once the worker has stopped
     await connection.close();

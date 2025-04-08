@@ -50,6 +50,7 @@
       "defaultConfiguration": "development",
       "dependsOn": ["build"],
       "options": {
+        "inspect": false,
         "buildTarget": "fulfillment:build",
         "runBuildTargetDependencies": false
       },

@@ -1,15 +1,26 @@
-import axios from 'axios';
+const post = async (path: string, body: any) => {
+  const result = await fetch('http://localhost:3000' + path, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  })
+  if (!result.ok) {
+    throw new Error(`Failed to call ${path}: ${result.statusText}`);
+  }
 
-const client = axios.create({ baseURL: 'http://localhost:3000' });
+  return result.json();
+};
 
 export async function validateOrder(orderId: string) {
-  const { data } = await client.post('/validate', { orderId });
+  await post('/validate', { orderId });
 }
 
 export async function payOrder(orderId: string, amountInCents: number) {
-  const { data } = await client.post('/pay', { orderId });
+  await post('/pay', { orderId });
 }
 
 export async function sendOrder(orderId: string, address: string) {
-  const { data } = await client.post('/send', { orderId });
+  await post('/send', { orderId });
 }
