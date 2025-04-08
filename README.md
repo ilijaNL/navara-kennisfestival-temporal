@@ -10,6 +10,10 @@
 
 - `npm install`
 
+## TODO:
+
+Implement the fulfillment workflow in `apps/fulfillment/src/workflows.ts`
+
 ## Running
 
 **Local Temporal server**

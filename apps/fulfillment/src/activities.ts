@@ -21,6 +21,6 @@ export async function payOrder(orderId: string, amountInCents: number) {
   await post('/pay', { orderId });
 }
 
-export async function sendOrder(orderId: string, address: string) {
+export async function shipOrder(orderId: string, address: string) {
   await post('/send', { orderId });
 }
