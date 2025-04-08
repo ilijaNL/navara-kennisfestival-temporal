@@ -21,8 +21,7 @@ const {
 /**
  * 1. Validate order
  * 2. Pay order
- * 3. Wait at least 20 seconds before sending the order (using durable sleep)
- * 4. Ship order
+ * 3. Wait at least 20 seconds and only then ship the order
  */
 export async function orderFulfillment(orderId: string) {
   // To be implemented

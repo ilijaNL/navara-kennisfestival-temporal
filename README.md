@@ -14,6 +14,12 @@
 
 Implement the fulfillment workflow in `apps/fulfillment/src/workflows.ts`
 
+### Requirements:
+
+1. Validate order
+2. Pay order
+3. Wait at least 20 seconds and only then ship the order
+
 ## Running
 
 **Local Temporal server**
