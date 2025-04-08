@@ -70,6 +70,7 @@ class Order {
       const canBeShippedLaterThan = Date.now() - 20_000;
       if (this.#state.paidAt > canBeShippedLaterThan) {
         // let the process crash on purpose
+        console.log('Woopsey - we cannot deal with this. You should wait some time before sending in this order. Bye bye!');
         process.exit(1);
       }
 
