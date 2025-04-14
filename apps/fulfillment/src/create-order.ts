@@ -6,8 +6,10 @@ import { TASK_QUEUE } from './constants';
 async function createOrder() {
   const temporalClient = new Client();
   const orderId = `order::${randomUUID()}`;
+  const orderAmount = Math.floor(Math.random() * 1000);
+  const orderAddress = `Some random address`;
   await temporalClient.workflow.start(orderFulfillment, {
-    args: [orderId],
+    args: [{ address: orderAddress, amount: orderAmount, orderId }],
     workflowId: orderId,
     taskQueue: TASK_QUEUE,
   });

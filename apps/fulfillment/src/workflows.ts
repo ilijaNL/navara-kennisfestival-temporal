@@ -17,6 +17,6 @@ const {
   },
 });
 
-export async function orderFulfillment(orderId: string) {
+export async function orderFulfillment(order: {orderId: string, amount: number, address: string}) {
   // To be implemented
 }
